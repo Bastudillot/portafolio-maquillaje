@@ -1,6 +1,18 @@
 import React, { useState } from 'react';
 
-// --- ICONOS SVG (Sin dependencias externas) ---
+// --- IMPORTACIÓN DE TUS IMÁGENES LOCALES (VS CODE) ---
+// En tu Visual Studio Code local, QUITA las dos barras "//" del inicio de estas líneas 
+// y borra el bloque de "IMÁGENES DE PRUEBA" de más abajo para usar tus fotos reales.
+//
+import fotoPerfil from './assets/Imagen1.jpeg';
+import imgPortafolio1 from './assets/Imagen2.jpeg';
+import imgPortafolio2 from './assets/Imagen3.jpeg';
+import imgPortafolio3 from './assets/Imagen4.jpeg';
+import imgPortafolio4 from './assets/Imagen5.jpeg';
+import imgPortafolio5 from './assets/Imagen6.jpeg';
+import imgPortafolio6 from './assets/Imagen7.jpeg';
+
+// --- ICONOS SVG (Sin dependencias externas para evitar errores) ---
 const HeartIcon = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>);
 const SparklesIcon = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>);
 const CameraIcon = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>);
@@ -13,7 +25,7 @@ const MapPinIcon = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" w
 
 // --- CONFIGURACIÓN DE DATOS ---
 const personalInfo = {
-  name: "Estudio de Belleza", // Cambiar por el nombre de tu prima
+  name: "Estudio de Belleza", 
   tagline: "Resaltando tu luz propia con el poder del maquillaje",
   about: "Soy una maquilladora profesional apasionada por el arte de transformar y realzar la belleza natural que cada persona posee. Con años de experiencia en el sector, mi enfoque se basa en escuchar las necesidades de mis clientes y utilizar productos de la más alta calidad para garantizar acabados impecables y duraderos. Creo firmemente que el maquillaje no es para esconder, sino para empoderar y hacerte brillar en tus momentos más importantes.",
   phone: "+56 9 6716 2874",
@@ -28,31 +40,32 @@ const services = [
     title: "Maquillaje para Novias",
     description: "Un servicio integral y personalizado para el día más importante. Incluye una sesión de prueba previa para diseñar el look perfecto, preparación profunda de la piel con técnicas de skincare avanzado, y el uso de productos a prueba de agua y de larga duración (HD) para que luzcas radiante de principio a fin.",
     icon: <HeartIcon className="w-8 h-8" />,
-    color: "bg-[#e2d1f0]" // Lavanda claro (Paleta Morada)
+    color: "bg-[#e2d1f0]" 
   },
   {
     id: 2,
     title: "Maquillaje Social",
     description: "Ideal para graduaciones, galas, fiestas o eventos de día/noche. Adaptamos el estilo a tu vestuario y tipo de evento, ya sea que busques un look sutil y luminoso ('no-makeup makeup') o un estilo dramático y audaz con ojos ahumados y contornos definidos.",
     icon: <SparklesIcon className="w-8 h-8" />,
-    color: "bg-[#bed4f5]" // Celeste claro (Paleta Azul)
+    color: "bg-[#bed4f5]"
   },
   {
     id: 3,
     title: "Maquillaje Editorial y Moda",
     description: "Servicio especializado para sesiones fotográficas, revistas, pasarelas o producciones audiovisuales. Trabajo en conjunto con directores de arte y fotógrafos para crear looks creativos, vanguardistas o de época, adaptados a la iluminación de estudio.",
     icon: <CameraIcon className="w-8 h-8" />,
-    color: "bg-[#d4b5ec]" // Lila intermedio (Paleta Morada)
+    color: "bg-[#d4b5ec]" 
   }
 ];
 
+// Aquí conectamos las variables de las imágenes con su categoría
 const portfolioItems = [
-  { id: 1, category: "Novias", img: "https://images.unsplash.com/photo-1595475884562-073c30d45670?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", title: "Novia Clásica" },
-  { id: 2, category: "Social", img: "https://images.unsplash.com/photo-1512496115851-a1c8f1307e5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", title: "Gala de Noche" },
-  { id: 3, category: "Editorial", img: "https://images.unsplash.com/photo-1542452255191-c85a98f2c5d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", title: "Sesión de Moda" },
-  { id: 4, category: "Social", img: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", title: "Glamour" },
-  { id: 5, category: "Novias", img: "https://images.unsplash.com/photo-1522337660859-02fbefca4702?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", title: "Preparación Novia" },
-  { id: 6, category: "Editorial", img: "https://images.unsplash.com/photo-1586445581567-33f7d13c4731?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80", title: "Color Creativo" }
+  { id: 1, category: "Novias", img: imgPortafolio1, title: "Novia Clásica" },
+  { id: 2, category: "Social", img: imgPortafolio2, title: "Gala de Noche" },
+  { id: 3, category: "Editorial", img: imgPortafolio3, title: "Sesión de Moda" },
+  { id: 4, category: "Social", img: imgPortafolio4, title: "Glamour" },
+  { id: 5, category: "Novias", img: imgPortafolio5, title: "Preparación Novia" },
+  { id: 6, category: "Editorial", img: imgPortafolio6, title: "Color Creativo" }
 ];
 
 export default function App() {
@@ -118,8 +131,9 @@ export default function App() {
             <div className="md:w-1/2">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-tr from-[#588bce] to-[#9f6ec2] rounded-2xl transform rotate-3 scale-105 opacity-50"></div>
+                {/* Aquí conectamos tu Imagen1.jpeg como foto de perfil */}
                 <img 
-                  src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                  src={fotoPerfil} 
                   alt="Maquilladora trabajando" 
                   className="relative rounded-2xl shadow-xl z-10 w-full object-cover h-[500px]"
                 />
@@ -289,6 +303,8 @@ export default function App() {
                   <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#9f6ec2] focus:border-transparent outline-none bg-[#f8f9fa]">
                     <option>Maquillaje para Novia</option>
                     <option>Maquillaje Social / Fiesta</option>
+                    <option>Editorial / Producción</option>
+                    <option>Clases de Automaquillaje</option>
                     <option>Otra consulta</option>
                   </select>
                 </div>
