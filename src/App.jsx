@@ -105,7 +105,7 @@ export default function App() {
     window.open(`https://wa.me/${numeroLimpio}?text=${mensajeCodificado}`, '_blank');
   };
 
-  const categories = ['Todos', 'Novias', 'Social', 'Editorial'];
+  const categories = ['Todos'];
 
   const filteredPortfolio = filter === 'Todos' 
     ? portfolioItems 
