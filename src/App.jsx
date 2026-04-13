@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 // --- IMPORTACIÓN DE TUS IMÁGENES LOCALES (VS CODE) ---
-// En tu Visual Studio Code local, QUITA las dos barras "//" del inicio de estas líneas 
+// En tu Visual Studio Code local, QUITA las dos barras "//" del inicio de estas líneas
 // y borra el bloque de "IMÁGENES DE PRUEBA" de más abajo para usar tus fotos reales.
 //
 import fotoPerfil from './assets/Imagen1.jpeg';
@@ -60,17 +60,51 @@ const services = [
 
 // Aquí conectamos las variables de las imágenes con su categoría
 const portfolioItems = [
-  { id: 1, category: "Novias", img: imgPortafolio1, title: "Novia Clásica" },
-  { id: 2, category: "Social", img: imgPortafolio2, title: "Gala de Noche" },
-  { id: 3, category: "Editorial", img: imgPortafolio3, title: "Sesión de Moda" },
-  { id: 4, category: "Social", img: imgPortafolio4, title: "Glamour" },
-  { id: 5, category: "Novias", img: imgPortafolio5, title: "Preparación Novia" },
-  { id: 6, category: "Editorial", img: imgPortafolio6, title: "Color Creativo" }
+  { id: 1, category: "", img: imgPortafolio1, title: "" },
+  { id: 2, category: "", img: imgPortafolio2, title: "" },
+  { id: 3, category: "", img: imgPortafolio3, title: "" },
+  { id: 4, category: "", img: imgPortafolio4, title: "" },
+  { id: 5, category: "", img: imgPortafolio5, title: "" },
+  { id: 6, category: "", img: imgPortafolio6, title: "" }
 ];
 
 export default function App() {
   const [filter, setFilter] = useState('Todos');
   
+  // NUEVO: Estado para guardar lo que el usuario escribe en el formulario
+  const [formData, setFormData] = useState({
+    nombre: '',
+    contacto: '',
+    servicio: 'Maquillaje para Novia',
+    mensaje: ''
+  });
+
+  // NUEVO: Función que actualiza el estado cada vez que el usuario teclea algo
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  // NUEVO: La magia que toma los datos y abre WhatsApp
+  const enviarWhatsApp = (e) => {
+    e.preventDefault(); // Evita que la página se recargue en blanco al hacer clic
+    
+    // 1. Limpiamos el número de tu prima (le quitamos el '+' y los espacios)
+    // Para que el enlace de WhatsApp funcione, necesita solo los números. Ej: 56912345678
+    const numeroLimpio = personalInfo.phone.replace(/[^0-9]/g, ''); 
+    
+    // 2. Armamos el mensaje ordenado con negritas (usando asteriscos) y saltos de línea
+    const mensajeTexto = `¡Hola! Vengo desde tu portafolio web. 💖\n\n*Mi nombre es:* ${formData.nombre}\n*Me interesa:* ${formData.servicio}\n*Mi teléfono/correo:* ${formData.contacto}\n\n*Detalles de mi fecha/consulta:* ${formData.mensaje}`;
+    
+    // 3. Traducimos el texto a formato de enlace de internet (cambia los espacios por %20, etc.)
+    const mensajeCodificado = encodeURIComponent(mensajeTexto);
+    
+    // 4. Abrimos la pestaña directa al chat de tu prima
+    window.open(`https://wa.me/${numeroLimpio}?text=${mensajeCodificado}`, '_blank');
+  };
+
   const categories = ['Todos', 'Novias', 'Social', 'Editorial'];
 
   const filteredPortfolio = filter === 'Todos' 
@@ -289,31 +323,62 @@ export default function App() {
 
             <div className="bg-white rounded-2xl p-8 shadow-2xl text-gray-800">
               <h3 className="text-2xl font-bold text-[#0c1f3d] mb-6">Envía un Mensaje</h3>
-              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+              
+              {/* NUEVO: Conectamos el formulario con nuestra función enviarWhatsApp */}
+              <form className="space-y-4" onSubmit={enviarWhatsApp}>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
-                  <input type="text" className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#9f6ec2] focus:border-transparent outline-none bg-[#f8f9fa]" placeholder="Tu nombre" />
+                  {/* NUEVO: Agregamos name, value y onChange a cada input */}
+                  <input 
+                    type="text" 
+                    name="nombre"
+                    value={formData.nombre}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#9f6ec2] focus:border-transparent outline-none bg-[#f8f9fa]" 
+                    placeholder="Tu nombre" 
+                  />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Correo o WhatsApp</label>
-                  <input type="text" className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#588bce] focus:border-transparent outline-none bg-[#f8f9fa]" placeholder="Para poder responderte" />
+                  <label className="block text-sm font-medium text-gray-700 mb-1">WhatsApp</label>
+                  <input 
+                    type="text" 
+                    name="contacto"
+                    value={formData.contacto}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#588bce] focus:border-transparent outline-none bg-[#f8f9fa]" 
+                    placeholder="Para poder responderte" 
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Tipo de Evento / Consulta</label>
-                  <select className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#9f6ec2] focus:border-transparent outline-none bg-[#f8f9fa]">
-                    <option>Maquillaje para Novia</option>
-                    <option>Maquillaje Social / Fiesta</option>
-                    <option>Editorial / Producción</option>
-                    <option>Clases de Automaquillaje</option>
-                    <option>Otra consulta</option>
+                  <select 
+                    name="servicio"
+                    value={formData.servicio}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#9f6ec2] focus:border-transparent outline-none bg-[#f8f9fa]"
+                  >
+                    <option value="Maquillaje para Novia">Maquillaje para Novia</option>
+                    <option value="Maquillaje Social / Fiesta">Maquillaje Social / Fiesta</option>
+                    <option value="Editorial / Producción">Editorial / Producción</option>
+                    <option value="Otra consulta">Otra consulta</option>
                   </select>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Mensaje o Detalles de la fecha</label>
-                  <textarea rows="4" className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#588bce] focus:border-transparent outline-none bg-[#f8f9fa]" placeholder="Cuéntame sobre la fecha, hora y estilo que buscas..."></textarea>
+                  <textarea 
+                    rows="4" 
+                    name="mensaje"
+                    value={formData.mensaje}
+                    onChange={handleChange}
+                    required
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#588bce] focus:border-transparent outline-none bg-[#f8f9fa]" 
+                    placeholder="Cuéntame sobre la fecha, hora y estilo que buscas..."
+                  ></textarea>
                 </div>
                 <button type="submit" className="w-full bg-gradient-to-r from-[#0c1f3d] to-[#5c3482] hover:from-[#225b9e] hover:to-[#8250ab] text-white font-bold py-3 px-6 rounded-lg transition-all shadow-md">
-                  Enviar Consulta
+                  Enviar Consulta por WhatsApp
                 </button>
               </form>
             </div>
