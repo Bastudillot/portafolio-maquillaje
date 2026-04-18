@@ -13,12 +13,12 @@ const MapPinIcon = ({ className }) => (<svg xmlns="http://www.w3.org/2000/svg" w
 
 // --- CONFIGURACIÓN DE DATOS ---
 const personalInfo = {
-  name: "Monique Makeup", 
+  name: "Blush & Glow", 
   tagline: "Resaltando tu luz propia con el poder del maquillaje",
   about: "Soy Monique, una maquilladora profesional apasionada por el arte de transformar y realzar la belleza natural que cada persona posee. Con años de experiencia en el sector, mi enfoque se basa en escuchar las necesidades de mis clientes y utilizar productos de la más alta calidad para garantizar acabados impecables y duraderos. Creo firmemente que el maquillaje no es para esconder, sino para empoderar y hacerte brillar en tus momentos más importantes.",
   phone: "+56 9 1234 5678",
   email: "contacto@moniquemakeup.com",
-  location: "Santiago, Chile",
+  location: "Los Andes, Chile",
   instagram: "@_blush_y_glow_",
   instagramLink: "https://www.instagram.com/_blush_y_glow_?igsh=bTBveWRuOGd3eTY4",
   logo: "/Logo_monique.jpg",
