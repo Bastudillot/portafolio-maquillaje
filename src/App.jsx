@@ -16,7 +16,7 @@ const personalInfo = {
   name: "Blush & Glow", 
   tagline: "Resaltando tu luz propia con el poder del maquillaje",
   about: "Soy Monique, una maquilladora profesional apasionada por el arte de transformar y realzar la belleza natural que cada persona posee. Con años de experiencia en el sector, mi enfoque se basa en escuchar las necesidades de mis clientes y utilizar productos de la más alta calidad para garantizar acabados impecables y duraderos. Creo firmemente que el maquillaje no es para esconder, sino para empoderar y hacerte brillar en tus momentos más importantes.",
-  phone: "+56 9 1234 5678",
+  phone: "+56 9 6716 2874",
   email: "moniquehidalgo28@gmail.com",
   location: "Los Andes, Chile",
   instagram: "@_blush_y_glow_",
